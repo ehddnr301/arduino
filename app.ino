@@ -1,20 +1,26 @@
-int i = 0;
 
 void setup()
 {
-    pinMode(6, OUTPUT);
+    Serial.begin(9600);
+
+    pinMode(6, INPUT);
+    pinMode(12, OUTPUT);
+    pinMode(13, OUTPUT);
 }
 
 void loop()
 {
-    for (i = 255; i >= 0; i -= 1)
+    digitalWrite(12, LOW);
+    digitalWrite(13, LOW);
+    if (digitalRead(6) == HIGH)
     {
-        analogWrite(6, i);
-        delay(10);
+        digitalWrite(12, HIGH);
+        digitalWrite(13, HIGH);
     }
-    for (i = 0; i <= 255; i += 1)
+    else
     {
-        analogWrite(6, i);
-        delay(10);
+        digitalWrite(12, LOW);
+        digitalWrite(13, LOW);
     }
+    delay(10);
 }
